@@ -6,12 +6,11 @@ def parametrize(*parameters):
     def decorator(func):
         def wrapper(*args, **kwargs):
             for params in parameters:
-                print(f'Called function [{func.__name__}] '
-                      f'with parameters={params}')
+                # print(f'Called function [{func.__name__}] '
+                #       f'with parameters={params}')
                 func(*args, *params)
-
-                print(f'Test for [{func.__name__}] '
-                      f'with parameters={params} passed!')
+                # print(f'Test for [{func.__name__}] '
+                #       f'with parameters={params} passed!')
         return wrapper
     return decorator
 

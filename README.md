@@ -23,6 +23,8 @@ _**`METHODS:`**_
           
       # curl -X GET -H 'Accept: */*' -H 'Connection: keep-alive' http://localhost:9090/scan/"<STRING: ADDRESS_REMOTE_HOST>"/<INT: BEGIN_PORT>/<INT: END_PORT>
 
+_**`TESTS:`**_
+Run `python tests.py` in the command line.
 
 ---
 
