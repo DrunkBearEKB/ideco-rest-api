@@ -90,7 +90,7 @@ def scan_ports(ip: str, begin_port: int, end_port: int) -> list[dict]:
 
         for port in range(_begin, _end):
             thread = threading.Thread(
-                target=check_port,
+                target=__scan_port,
                 args=(ip, port, scan_results))
             threads.append(thread)
             thread.start()
@@ -106,7 +106,7 @@ def scan_ports(ip: str, begin_port: int, end_port: int) -> list[dict]:
     return results
 
 
-def check_port(ip: str, port: int, out: multiprocessing.Queue) -> None:
+def __scan_port(ip: str, port: int, out: multiprocessing.Queue) -> None:
     """
     Scans port for this ip address
     :param ip: host ip address to check
@@ -168,12 +168,12 @@ async def handle_request(request: web.Request) -> web.Response:
 logger = logging.getLogger('api')
 logger.setLevel(logging.INFO)
 
-# handler = logging.handlers.SysLogHandler(
-#     address=('localhost', 8080)
-# )
-handler = logging.FileHandler(
-    datetime.datetime.now().strftime('logs/logfile_%Y-%m-%d_%H-%M.log')
+handler = logging.handlers.SysLogHandler(
+    address=('localhost', 8080)
 )
+# handler = logging.FileHandler(
+#     datetime.datetime.now().strftime('logs/logfile_%Y-%m-%d_%H-%M.log')
+# )
 handler.setLevel(logging.INFO)
 
 formatter = logging.Formatter(
