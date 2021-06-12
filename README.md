@@ -26,6 +26,10 @@ _**`METHODS:`**_
 _**`TESTS:`**_
 Run `python tests.py` in the command line.
 
+_**`LOGS:`**_
+If you want to clear logs of api working you should run `python clear_Logs.py` 
+in the command line.
+
 ---
 
 ### _Required:_

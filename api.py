@@ -7,7 +7,7 @@ import configparser
 import threading
 import multiprocessing
 import logging.handlers
-import datetime
+import datetime  # use it if you want to log into files
 
 FILE_CONFIG = f'{os.path.dirname(__file__)}/' + 'config.ini'
 DEFAULT_CONFIG = \
@@ -155,7 +155,7 @@ async def handle_request(request: web.Request) -> web.Response:
             )
 
     except ValueError:
-        logger.info('Can not parse request!')
+        logger.info('Can not parse the request!')
         return web.HTTPBadRequest()
 
     scan_results = scan_ports(ip, begin_port, end_port)
@@ -168,12 +168,12 @@ async def handle_request(request: web.Request) -> web.Response:
 logger = logging.getLogger('api')
 logger.setLevel(logging.INFO)
 
-handler = logging.handlers.SysLogHandler(
-    address=('localhost', 8080)
-)
-# handler = logging.FileHandler(
-#     datetime.datetime.now().strftime('logs/logfile_%Y-%m-%d_%H-%M.log')
+# handler = logging.handlers.SysLogHandler(
+#     address=('localhost', 8080)
 # )
+handler = logging.FileHandler(
+    datetime.datetime.now().strftime('logs/logfile_%Y-%m-%d_%H-%M.log')
+)
 handler.setLevel(logging.INFO)
 
 formatter = logging.Formatter(
@@ -201,14 +201,14 @@ try:
         sys.exit()
 
 except (ValueError, KeyError):
-    logger.error('Can not parse config file!')
-    print('Can not parse config file!')
+    logger.error('Can not parse the config file!')
+    print('Can not parse the config file!')
     sys.exit()
 
 
 def main() -> None:
     """
-    The main function of the program
+    The main function of the program.
     :rtype: None
     """
     # defines the main app and routes for this app
@@ -224,8 +224,9 @@ def main() -> None:
         socket_server_temp.listen()
     except OSError:
         socket_server_temp.close()
-        logger.error(f'Sever can not be started on port equal to "{PORT}"!')
-        print(f'Sever can not be started on port equal to "{PORT}"!')
+        logger.error(
+            f'Sever can not be started on the port equal to "{PORT}"!')
+        print(f'Sever can not be started on the port equal to "{PORT}"!')
         sys.exit()
     del socket_server_temp
 
